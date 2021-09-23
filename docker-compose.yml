@@ -1,17 +1,19 @@
-version: '3.7'
+version: '3.8'
 
 services:
   web:
     build: .
     container_name: web-service
-    command: |
-      bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; uvicorn main:app --reload --workers 1 --host 0.0.0.0 --port 8000'
+    command: uvicorn main:app --reload --workers 1 --host 0.0.0.0 --port 8000
     volumes:
       - ./src:/usr/src
     ports:
       - 8002:8000
     environment:
       - DATABASE_URL=postgresql://user_pg:user_pg@localhost:5432/db
+    depends_on:
+      - db
+
   db:
     image: postgres:12.0-alpine
     container_name: db-service
