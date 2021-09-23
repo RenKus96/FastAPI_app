@@ -3,6 +3,7 @@ env/
 .vscode/
 activate_django.cmd
 *.sql
+.gitattributes
 
 # migrations
 **/migrations/**
