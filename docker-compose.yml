@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.7'
 
 services:
   web:
@@ -13,7 +13,7 @@ services:
     environment:
       - DATABASE_URL=postgresql://user_pg:user_pg@localhost:5432/db
   db:
-    image: postgres:13-alpine
+    image: postgres:12.0-alpine
     container_name: db-service
     volumes:
       - postgres_data:/var/lib/postgresql/data/
