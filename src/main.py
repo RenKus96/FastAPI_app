@@ -95,3 +95,6 @@ def user_delete(id: int = Body(..., embed=True), db: Session = Depends(get_db)):
 #     return db_user
 #
 #
+@app.get('/')
+async def read_root():
+    return {"message": "Hello, World!"}
