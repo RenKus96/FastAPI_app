@@ -1,9 +1,10 @@
 version: '3.7'
 
 services:
-  web:
+  app:
     build: .
-    container_name: web-service
+    container_name: app-service
+    restart: always
     command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; uvicorn main:app --host 0.0.0.0'
     volumes:
       - ./src:/usr/src
@@ -13,9 +14,19 @@ services:
       - DATABASE_URL=postgresql://user_pg:user_pg@db:5432/appdb
     depends_on:
       - db
+
+  web:
+    build: ./nginx
+    container_name: nginx-service
+    ports:
+      - 80:80
+    depends_on:
+      - app
+
   db:
     image: postgres:12.0-alpine
     container_name: db-service
+    restart: always
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     expose:
@@ -26,7 +37,6 @@ services:
       - POSTGRES_DB=appdb
       - POSTGRES_USER=user_pg
       - POSTGRES_PASSWORD=user_pg
-
 
 volumes:
   postgres_data:
