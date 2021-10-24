@@ -5,9 +5,9 @@ from sqlalchemy.orm import sessionmaker
 import os
 
 
-SQLALCHEMY_DATABASE_URL = os.environ.get('DATABASE_URL', 'postgresql://user_pg:user_pg@localhost:5432/appdb')
+# SQLALCHEMY_DATABASE_URL = os.environ.get('DATABASE_URL', 'postgresql://user_pg:user_pg@localhost:5432/appdb')
 
-#SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
+SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
 #SQLALCHEMY_DATABASE_URL = "postgresql://user_pg:user_pg@localhost:5432/appdb"
 #SQLALCHEMY_DATABASE_URL = "postgresql://user_pg:user_pg@db:5432/appdb"
 

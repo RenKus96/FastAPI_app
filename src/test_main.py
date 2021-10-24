@@ -21,7 +21,7 @@ user_out = {
 
 user_1 = {
   "name": "user1",
-  "email": "email1@test.com",
+  "email": "user1@mail.com",
   "full_name": None,
   "is_active": True,
   "is_superuser": False
@@ -39,7 +39,8 @@ def test_read_root():
 def test_create_user():
     response = client.post("/create-user/", json=user_in)
     assert response.status_code == 200 and response.json() == user_out or\
-           response.status_code == 400 and response.json() == {"detail": "Login already registered"}
+           response.status_code == 400 and (response.json() == {"detail": "Login already registered"} or
+                                            response.json() == {"detail": "Email already registered"})
 
 
 def test_user():
